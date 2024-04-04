@@ -11,7 +11,7 @@ class HelplineView extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 60,
+            height: 50,
             width: double.infinity,
             color: LightAppColors().seedColor,
             child: const Center(

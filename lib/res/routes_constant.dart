@@ -1,6 +1,11 @@
+import 'package:bloodbank_management/view/screens/bloodbank_details_view.dart';
+import 'package:bloodbank_management/view/screens/bloodbanks_list_view.dart';
+import 'package:bloodbank_management/view/screens/camps_list_view.dart';
+import 'package:bloodbank_management/view/screens/donors_list_view.dart';
 import 'package:bloodbank_management/view/screens/helpline_view.dart';
 import 'package:bloodbank_management/view/screens/home_view.dart';
 import 'package:bloodbank_management/view/screens/login_view.dart';
+import 'package:bloodbank_management/view/screens/receivers_list_view.dart';
 import 'package:bloodbank_management/view/screens/register_view.dart';
 import 'package:bloodbank_management/view/screens/request_form_screen.dart';
 import 'package:bloodbank_management/view/screens/splash_view.dart';
@@ -34,7 +39,32 @@ GoRouter router = GoRouter(routes: [
   ),
   GoRoute(
     name: 'helpline',
-    path: '/',
+    path: '/helpline',
     builder: (context, state) => const HelplineView(),
+  ),
+  GoRoute(
+    name: 'camps-list',
+    path: '/camps-list',
+    builder: (context, state) => const CampsListView(),
+  ),
+  GoRoute(
+    name: 'bloodbanks-list',
+    path: '/bloodbanks-list',
+    builder: (context, state) => const BloodbankListView(),
+  ),
+  GoRoute(
+    name: 'bloodbanks-details',
+    path: '/',
+    builder: (context, state) => const BloodbankDetailsView(),
+  ),
+  GoRoute(
+    name: 'receivers-list',
+    path: '/receivers-list',
+    builder: (context, state) => const ReceiversListView(),
+  ),
+  GoRoute(
+    name: 'donors-list',
+    path: '/donors-list',
+    builder: (context, state) => const DonorsListView(),
   )
 ]);

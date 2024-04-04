@@ -1,9 +1,9 @@
 import 'package:bloodbank_management/res/colors.dart';
-import 'package:bloodbank_management/view/components/donor_card.dart';
+import 'package:bloodbank_management/view/components/receiver_card.dart';
 import 'package:flutter/material.dart';
 
-class DonorsListView extends StatelessWidget {
-  const DonorsListView({super.key});
+class ReceiversListView extends StatelessWidget {
+  const ReceiversListView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class DonorsListView extends StatelessWidget {
             color: LightAppColors().seedColor,
             child: const Center(
               child: Text(
-                'Receive Blood',
+                'Donate Blood',
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -36,7 +36,7 @@ class DonorsListView extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    DonorCard(
+                    ReceiverCard(
                         name: 'Jay',
                         age: '20',
                         location: 'Bhiwandi',
@@ -47,13 +47,13 @@ class DonorsListView extends StatelessWidget {
                       indent: 40,
                       endIndent: 40,
                     ),
-                    DonorCard(
+                    ReceiverCard(
                         name: 'Mansi',
                         age: '21',
                         location: 'Kharghar',
                         imageUrl: 'assets/Images/person3.png',
                         bloodgroup: 'B-'),
-                    DonorCard(
+                    ReceiverCard(
                         name: 'Sanjay',
                         age: '35',
                         location: 'Bhiwandi',
@@ -64,7 +64,7 @@ class DonorsListView extends StatelessWidget {
                       indent: 40,
                       endIndent: 40,
                     ),
-                    DonorCard(
+                    ReceiverCard(
                         name: 'Suman',
                         age: '40',
                         location: 'Govandi',
@@ -75,7 +75,7 @@ class DonorsListView extends StatelessWidget {
                       indent: 40,
                       endIndent: 40,
                     ),
-                    DonorCard(
+                    ReceiverCard(
                         name: 'Prasad',
                         age: '29',
                         location: 'Belapur',
@@ -86,7 +86,7 @@ class DonorsListView extends StatelessWidget {
                       indent: 40,
                       endIndent: 40,
                     ),
-                    DonorCard(
+                    ReceiverCard(
                         name: 'Abhay',
                         age: '23',
                         location: 'Kurla',
