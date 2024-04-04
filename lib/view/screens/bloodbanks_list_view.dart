@@ -1,4 +1,5 @@
 import 'package:bloodbank_management/res/colors.dart';
+import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/view/components/bloodbank_card.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,14 @@ class BloodbankListView extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController searchController = TextEditingController();
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            router.pop();
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(

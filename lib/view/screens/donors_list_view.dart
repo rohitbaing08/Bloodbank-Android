@@ -1,4 +1,5 @@
 import 'package:bloodbank_management/res/colors.dart';
+import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/view/components/donor_card.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,9 @@ class DonorsListView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            router.pop();
+          },
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),

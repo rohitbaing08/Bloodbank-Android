@@ -1,4 +1,5 @@
 import 'package:bloodbank_management/res/colors.dart';
+import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -75,7 +76,9 @@ class LoginView extends StatelessWidget {
                 height: 40,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  router.go('/bottom-nav');
+                },
                 style: ButtonStyle(
                   overlayColor: MaterialStateProperty.all(Colors.transparent),
                 ),

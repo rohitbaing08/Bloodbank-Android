@@ -1,5 +1,6 @@
 import 'package:bloodbank_management/view/screens/bloodbank_details_view.dart';
 import 'package:bloodbank_management/view/screens/bloodbanks_list_view.dart';
+import 'package:bloodbank_management/view/screens/bottom_navbar.dart';
 import 'package:bloodbank_management/view/screens/camps_list_view.dart';
 import 'package:bloodbank_management/view/screens/donors_list_view.dart';
 import 'package:bloodbank_management/view/screens/helpline_view.dart';
@@ -14,8 +15,13 @@ import 'package:go_router/go_router.dart';
 GoRouter router = GoRouter(routes: [
   GoRoute(
     name: 'splash',
-    path: '/splash',
+    path: '/',
     builder: (context, state) => const SplashView(),
+  ),
+  GoRoute(
+    name: 'bottom-navbar',
+    path: '/bottom-nav',
+    builder: (context, state) => const BottomNavBar(),
   ),
   GoRoute(
     name: 'home',
@@ -54,7 +60,7 @@ GoRouter router = GoRouter(routes: [
   ),
   GoRoute(
     name: 'bloodbanks-details',
-    path: '/',
+    path: '/bloodbanks-details',
     builder: (context, state) => const BloodbankDetailsView(),
   ),
   GoRoute(
