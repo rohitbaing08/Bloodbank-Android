@@ -5,14 +5,13 @@ class CampCard extends StatelessWidget {
   final String name;
   final String url;
   final String date;
-  final String time;
+
   final String location;
   const CampCard(
       {super.key,
       required this.name,
       required this.url,
       required this.date,
-      required this.time,
       required this.location});
 
   @override
@@ -45,29 +44,13 @@ class CampCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Date: $date',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 30,
-                            ),
-                            Text(
-                              time,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
+                        Text(
+                          'Date: $date',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 14,
+                          ),
                         ),
                         Text(
                           'Location: $location',

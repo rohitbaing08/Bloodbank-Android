@@ -35,31 +35,26 @@ class CampsListView extends StatelessWidget {
                         name: 'Campaign 1',
                         url: '',
                         date: '24/04/2024',
-                        time: '9:00 AM',
                         location: 'Thane'),
                     CampCard(
                         name: 'Campaign 2',
                         url: '',
                         date: '15/04/2024',
-                        time: '11:00 AM',
                         location: 'Dadar'),
                     CampCard(
                         name: 'Campaign 3',
                         url: '',
                         date: '24/03/2024',
-                        time: '8:30 AM',
                         location: 'Belapur'),
                     CampCard(
                         name: 'Campaign 4',
                         url: '',
                         date: '04/04/2024',
-                        time: '1:00 PM',
                         location: 'Bhiwandi'),
                     CampCard(
                         name: 'Campaign 5',
                         url: '',
                         date: '20/04/2024',
-                        time: '12:00 PM',
                         location: 'Kharghar')
                   ],
                 ),
