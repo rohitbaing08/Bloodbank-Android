@@ -1,14 +1,21 @@
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController usernameController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -29,6 +36,7 @@ class RegisterView extends StatelessWidget {
                 height: 80,
               ),
               TextFormField(
+                controller: emailController,
                 decoration: const InputDecoration(
                   hintText: 'Enter email',
                   label: Text(
@@ -46,6 +54,7 @@ class RegisterView extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
+                controller: usernameController,
                 decoration: const InputDecoration(
                   hintText: 'Enter username',
                   label: Text(
@@ -63,6 +72,7 @@ class RegisterView extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
+                controller: passwordController,
                 decoration: const InputDecoration(
                   hintText: 'Enter password',
                   label: Text(
@@ -80,8 +90,24 @@ class RegisterView extends StatelessWidget {
                 height: 70,
               ),
               TextButton(
-                onPressed: () {
-                  router.go('/bottom-nav');
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text)
+                        .then((value) async {
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setBool('isLoggedIn', true);
+                      Fluttertoast.showToast(
+                          msg: 'User registered successfully!!');
+                      router.go('/bottom-nav');
+                    });
+                  } catch (e) {
+                    Fluttertoast.showToast(
+                        msg: 'Registration unsuccessful!!\nTry again.');
+                  }
                 },
                 style: ButtonStyle(
                   overlayColor: MaterialStateProperty.all(Colors.transparent),

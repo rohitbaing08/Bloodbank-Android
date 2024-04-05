@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -12,11 +13,20 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  Future<bool> isLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('isLoggedIn') ?? false;
+  }
+
   @override
   void initState() {
-    Timer(const Duration(seconds: 2), () {
-      router.go('/register');
-    });
+    isLoggedIn().then(
+      (value) {
+        Timer(const Duration(seconds: 2), () {
+          value ? router.go('/bottom-nav') : router.go('/register');
+        });
+      },
+    );
     super.initState();
   }
 

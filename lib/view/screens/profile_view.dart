@@ -1,5 +1,8 @@
 import 'package:bloodbank_management/res/colors.dart';
+import 'package:bloodbank_management/res/routes_constant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -17,7 +20,14 @@ class _ProfileViewState extends State<ProfileView> {
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: IconButton(
-                  onPressed: () async {},
+                  onPressed: () async {
+                    await FirebaseAuth.instance.signOut().then((value) async {
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setBool('isLoggedIn', false);
+                      router.go('/register');
+                    });
+                  },
                   icon: const Icon(
                     Icons.logout_outlined,
                     color: Colors.black,

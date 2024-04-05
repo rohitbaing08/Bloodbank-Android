@@ -1,14 +1,19 @@
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -29,10 +34,11 @@ class LoginView extends StatelessWidget {
                 height: 120,
               ),
               TextFormField(
+                controller: emailController,
                 decoration: const InputDecoration(
-                  hintText: 'Enter username',
+                  hintText: 'Enter email',
                   label: Text(
-                    'Username',
+                    'Email',
                     style: TextStyle(color: Colors.black),
                   ),
                   border: OutlineInputBorder(
@@ -46,6 +52,7 @@ class LoginView extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
+                controller: passwordController,
                 decoration: const InputDecoration(
                   hintText: 'Enter password',
                   label: Text(
@@ -76,8 +83,23 @@ class LoginView extends StatelessWidget {
                 height: 40,
               ),
               TextButton(
-                onPressed: () {
-                  router.go('/bottom-nav');
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text)
+                        .then((value) async {
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setBool('isLoggedIn', true);
+                      Fluttertoast.showToast(msg: 'Login successful!!');
+                      router.go('/bottom-nav');
+                    });
+                  } catch (e) {
+                    Fluttertoast.showToast(
+                        msg: 'Login unsuccessful!!\nPlease try again');
+                  }
                 },
                 style: ButtonStyle(
                   overlayColor: MaterialStateProperty.all(Colors.transparent),
