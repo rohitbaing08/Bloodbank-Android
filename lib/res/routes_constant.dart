@@ -8,7 +8,7 @@ import 'package:bloodbank_management/view/screens/home_view.dart';
 import 'package:bloodbank_management/view/screens/login_view.dart';
 import 'package:bloodbank_management/view/screens/receivers_list_view.dart';
 import 'package:bloodbank_management/view/screens/register_view.dart';
-import 'package:bloodbank_management/view/screens/request_form_screen.dart';
+import 'package:bloodbank_management/view/screens/registration_form_screen.dart';
 import 'package:bloodbank_management/view/screens/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -39,9 +39,9 @@ GoRouter router = GoRouter(routes: [
     builder: (context, state) => const LoginView(),
   ),
   GoRoute(
-    name: 'request-form',
-    path: '/reguest-form',
-    builder: (context, state) => const RequestForm(),
+    name: 'registration-form',
+    path: '/registration-form',
+    builder: (context, state) => const RegistrationForm(),
   ),
   GoRoute(
     name: 'helpline',

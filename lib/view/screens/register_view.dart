@@ -1,11 +1,10 @@
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bloodbank_management/view_model/auth_view_model.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
@@ -89,43 +88,32 @@ class RegisterView extends StatelessWidget {
               const SizedBox(
                 height: 70,
               ),
-              TextButton(
-                onPressed: () async {
-                  try {
-                    await FirebaseAuth.instance
-                        .createUserWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text)
-                        .then((value) async {
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      prefs.setBool('isLoggedIn', true);
-                      Fluttertoast.showToast(
-                          msg: 'User registered successfully!!');
-                      router.go('/bottom-nav');
-                    });
-                  } catch (e) {
-                    Fluttertoast.showToast(
-                        msg: 'Registration unsuccessful!!\nTry again.');
-                  }
-                },
-                style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.all(Colors.transparent),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: LightAppColors().seedColor,
+              Consumer<AuthViewModel>(
+                builder: (context, value, child) => TextButton(
+                  onPressed: () async {
+                    value.email = emailController.text;
+                    value.password = passwordController.text;
+                    value.username = usernameController.text;
+                    router.go('/registration-form');
+                  },
+                  style: ButtonStyle(
+                    overlayColor: MaterialStateProperty.all(Colors.transparent),
                   ),
-                  height: 60,
-                  width: 170,
-                  child: const Center(
-                    child: Text(
-                      'Sign Up',
-                      style: TextStyle(
-                          color: Color.fromRGBO(244, 244, 244, 1),
-                          fontSize: 30,
-                          fontWeight: FontWeight.w600),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: LightAppColors().seedColor,
+                    ),
+                    height: 60,
+                    width: 170,
+                    child: const Center(
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(
+                            color: Color.fromRGBO(244, 244, 244, 1),
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600),
+                      ),
                     ),
                   ),
                 ),

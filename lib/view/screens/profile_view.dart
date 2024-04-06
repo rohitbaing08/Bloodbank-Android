@@ -2,6 +2,7 @@ import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileView extends StatefulWidget {
@@ -25,6 +26,7 @@ class _ProfileViewState extends State<ProfileView> {
                       SharedPreferences prefs =
                           await SharedPreferences.getInstance();
                       prefs.setBool('isLoggedIn', false);
+                      Fluttertoast.showToast(msg: 'Logout successfully!!');
                       router.go('/register');
                     });
                   },

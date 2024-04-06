@@ -1,7 +1,10 @@
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/res/theme/theme_constants.dart';
+import 'package:bloodbank_management/view_model/auth_view_model.dart';
+import 'package:bloodbank_management/view_model/home_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
 
@@ -18,12 +21,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routerConfig: router,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: ThemeMode.light,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => HomeViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AuthViewModel(),
+        ),
+      ],
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: router,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.light,
+      ),
     );
   }
 }
