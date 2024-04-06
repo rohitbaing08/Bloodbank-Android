@@ -63,9 +63,7 @@ class _ProfileViewState extends State<ProfileView> {
                     bottom: 0,
                     right: 0,
                     child: GestureDetector(
-                      onTap: () {
-                        // Add your onPressed logic here
-                      },
+                      onTap: () {},
                       child: Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
