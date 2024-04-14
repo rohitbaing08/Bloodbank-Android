@@ -1,3 +1,4 @@
+import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/view_model/home_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -85,7 +86,13 @@ class _HomeViewState extends State<HomeView> {
                                       onTap: () {
                                         router.push('/receivers-list');
                                       },
-                                      child: SizedBox(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color:
+                                                    LightAppColors().seedColor),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
                                         height: 140,
                                         width: 140,
                                         child: Image.asset(
@@ -106,7 +113,13 @@ class _HomeViewState extends State<HomeView> {
                                       onTap: () {
                                         router.push('/donors-list');
                                       },
-                                      child: SizedBox(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color:
+                                                    LightAppColors().seedColor),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
                                         height: 140,
                                         width: 140,
                                         child: Image.asset(
@@ -129,7 +142,12 @@ class _HomeViewState extends State<HomeView> {
                                   onTap: () {
                                     router.push('/bloodbanks-list');
                                   },
-                                  child: SizedBox(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: LightAppColors().seedColor),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
                                     height: 140,
                                     width: 140,
                                     child: Image.asset(
