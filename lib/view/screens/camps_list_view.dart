@@ -1,6 +1,8 @@
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/view/components/camp_card.dart';
+import 'package:bloodbank_management/view_model/camps_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CampsListView extends StatelessWidget {
   const CampsListView({super.key});
@@ -25,38 +27,32 @@ class CampsListView extends StatelessWidget {
               ),
             ),
           ),
-          const Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    CampCard(
-                        name: 'Campaign 1',
-                        url: '',
-                        date: '24/04/2024',
-                        location: 'Thane'),
-                    CampCard(
-                        name: 'Campaign 2',
-                        url: '',
-                        date: '15/04/2024',
-                        location: 'Dadar'),
-                    CampCard(
-                        name: 'Campaign 3',
-                        url: '',
-                        date: '24/03/2024',
-                        location: 'Belapur'),
-                    CampCard(
-                        name: 'Campaign 4',
-                        url: '',
-                        date: '04/04/2024',
-                        location: 'Bhiwandi'),
-                    CampCard(
-                        name: 'Campaign 5',
-                        url: '',
-                        date: '20/04/2024',
-                        location: 'Kharghar')
-                  ],
+          Consumer<CampsViewModel>(
+            builder: (context, value, child) => Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FutureBuilder(
+                  future: value.fetchCamps(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      var data = snapshot.data;
+                      return SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            ...List.generate(
+                                data.length,
+                                (index) => CampCard(
+                                    name: data[index].name,
+                                    url: '',
+                                    date: data[index].date,
+                                    location: data[index].location))
+                          ],
+                        ),
+                      );
+                    }
+                  },
                 ),
               ),
             ),

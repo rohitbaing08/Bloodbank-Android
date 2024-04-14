@@ -1,7 +1,9 @@
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/view/components/bloodbank_card.dart';
+import 'package:bloodbank_management/view_model/bloodbank_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BloodbankListView extends StatelessWidget {
   const BloodbankListView({super.key});
@@ -18,56 +20,57 @@ class BloodbankListView extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: [
-            TextFormField(
-              controller: searchController,
-              decoration: InputDecoration(
-                hintText: 'Search',
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: LightAppColors().seedColor,
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: LightAppColors().seedColor),
-                  borderRadius: BorderRadius.circular(50),
-                ),
-              ),
-            ),
-            const Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      BloodbankCard(
-                          name: 'Bloodbank 1',
-                          website: 'bloodbank1.com',
-                          location: 'Thane'),
-                      BloodbankCard(
-                          name: 'Bloodbank 2',
-                          website: 'bloodbank2.com',
-                          location: 'Dadar'),
-                      BloodbankCard(
-                          name: 'Bloodbank 3',
-                          website: 'bloodbank3.com',
-                          location: 'Belapur'),
-                      BloodbankCard(
-                          name: 'Bloodbank 4',
-                          website: 'bloodbank4.com',
-                          location: 'Bhiwandi'),
-                      BloodbankCard(
-                          name: 'Bloodbank 5',
-                          website: 'bloodbank5.com',
-                          location: 'Kharghar')
-                    ],
+      body: Consumer<BloodbankViewModel>(
+        builder: (context, value, child) => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            children: [
+              TextFormField(
+                controller: searchController,
+                onChanged: (value) {},
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: LightAppColors().seedColor,
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: LightAppColors().seedColor),
+                    borderRadius: BorderRadius.circular(50),
                   ),
                 ),
               ),
-            )
-          ],
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FutureBuilder(
+                    future: value.fetchBloodbanks(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else {
+                        print(snapshot.data[0].name);
+                        var data = snapshot.data;
+                        return SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              ...List.generate(
+                                data.length,
+                                (index) => BloodbankCard(
+                                    name: data[index].name,
+                                    website: data[index].email,
+                                    location: data[index].location),
+                              )
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
