@@ -3,6 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class BloodbankViewModel extends ChangeNotifier {
+  List data = [];
+
+  updateList() {
+    notifyListeners();
+  }
+
   Future<dynamic> fetchBloodbanks() async {
     try {
       QuerySnapshot querySnapshot =
@@ -11,7 +17,6 @@ class BloodbankViewModel extends ChangeNotifier {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         return BloodbankModel.fromJson(data);
       }).toList();
-
       return bloodbanks;
     } catch (e) {
       print('Error fetching bloodbanks: $e');

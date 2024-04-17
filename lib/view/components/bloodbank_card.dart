@@ -1,16 +1,14 @@
+import 'package:bloodbank_management/models/bloodbank_model.dart';
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:flutter/material.dart';
 
 class BloodbankCard extends StatelessWidget {
-  final String name;
-  final String website;
-  final String location;
-  const BloodbankCard(
-      {super.key,
-      required this.name,
-      required this.website,
-      required this.location});
+  final BloodbankModel bloodbank;
+  const BloodbankCard({
+    super.key,
+    required this.bloodbank,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +27,7 @@ class BloodbankCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  bloodbank.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
@@ -45,7 +43,7 @@ class BloodbankCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Email: $website',
+                            'Email: ${bloodbank.email}',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -53,7 +51,7 @@ class BloodbankCard extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'Location: $location',
+                            'Location: ${bloodbank.location}',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(

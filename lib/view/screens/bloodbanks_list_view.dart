@@ -27,7 +27,9 @@ class BloodbankListView extends StatelessWidget {
             children: [
               TextFormField(
                 controller: searchController,
-                onChanged: (value) {},
+                onChanged: (val) {
+                  value.updateList();
+                },
                 decoration: InputDecoration(
                   hintText: 'Search',
                   prefixIcon: Icon(
@@ -46,19 +48,24 @@ class BloodbankListView extends StatelessWidget {
                   child: FutureBuilder(
                     future: value.fetchBloodbanks(),
                     builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
                       } else {
-                        var data = snapshot.data;
+                        value.data = snapshot.data
+                            .where((ele) => ele.name
+                                .toString()
+                                .toLowerCase()
+                                .contains(searchController.text.toLowerCase()))
+                            .toList();
+
                         return SingleChildScrollView(
                           child: Column(
                             children: [
                               ...List.generate(
-                                data.length,
+                                value.data.length,
                                 (index) => BloodbankCard(
-                                    name: data[index].name,
-                                    website: data[index].email,
-                                    location: data[index].location),
+                                  bloodbank: value.data[index],
+                                ),
                               )
                             ],
                           ),
