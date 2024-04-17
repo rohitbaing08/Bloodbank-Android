@@ -23,7 +23,7 @@ class _SplashViewState extends State<SplashView> {
     isLoggedIn().then(
       (value) {
         Timer(const Duration(seconds: 2), () {
-          value ? router.go('/bottom-nav') : router.go('/register');
+          value ? router.go('/bottom-nav') : router.go('/login');
         });
       },
     );
