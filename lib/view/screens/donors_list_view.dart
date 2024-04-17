@@ -43,7 +43,6 @@ class DonorsListView extends StatelessWidget {
                         name: 'Jay',
                         age: '20',
                         location: 'Bhiwandi',
-                        imageUrl: 'assets/Images/person2.png',
                         bloodgroup: 'A+'),
                     Divider(
                       height: 10,
@@ -54,13 +53,16 @@ class DonorsListView extends StatelessWidget {
                         name: 'Mansi',
                         age: '21',
                         location: 'Kharghar',
-                        imageUrl: 'assets/Images/person3.png',
                         bloodgroup: 'B-'),
+                    Divider(
+                      height: 10,
+                      indent: 40,
+                      endIndent: 40,
+                    ),
                     DonorCard(
                         name: 'Sanjay',
                         age: '35',
                         location: 'Bhiwandi',
-                        imageUrl: 'assets/Images/person1.png',
                         bloodgroup: 'B+'),
                     Divider(
                       height: 10,
@@ -71,7 +73,6 @@ class DonorsListView extends StatelessWidget {
                         name: 'Suman',
                         age: '40',
                         location: 'Govandi',
-                        imageUrl: 'assets/Images/person3.png',
                         bloodgroup: 'O+'),
                     Divider(
                       height: 10,
@@ -82,7 +83,6 @@ class DonorsListView extends StatelessWidget {
                         name: 'Prasad',
                         age: '29',
                         location: 'Belapur',
-                        imageUrl: 'assets/Images/person1.png',
                         bloodgroup: 'AB+'),
                     Divider(
                       height: 10,
@@ -93,7 +93,6 @@ class DonorsListView extends StatelessWidget {
                         name: 'Abhay',
                         age: '23',
                         location: 'Kurla',
-                        imageUrl: 'assets/Images/person2.png',
                         bloodgroup: 'A-'),
                   ],
                 ),

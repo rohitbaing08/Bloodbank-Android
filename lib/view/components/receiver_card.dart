@@ -6,14 +6,14 @@ class ReceiverCard extends StatelessWidget {
   final String age;
   final String location;
   final String bloodgroup;
-  final String imageUrl;
-  const ReceiverCard(
-      {super.key,
-      required this.name,
-      required this.age,
-      required this.location,
-      required this.bloodgroup,
-      required this.imageUrl});
+
+  const ReceiverCard({
+    super.key,
+    required this.name,
+    required this.age,
+    required this.location,
+    required this.bloodgroup,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class ReceiverCard extends StatelessWidget {
               SizedBox(
                 height: 90,
                 width: 90,
-                child: Image.asset(imageUrl),
+                child: Image.asset('assets/Images/profilepic.png'),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

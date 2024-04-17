@@ -5,14 +5,13 @@ class DonorCard extends StatelessWidget {
   final String name;
   final String age;
   final String location;
-  final String imageUrl;
+
   final String bloodgroup;
   const DonorCard(
       {super.key,
       required this.name,
       required this.age,
       required this.location,
-      required this.imageUrl,
       required this.bloodgroup});
 
   @override
@@ -21,9 +20,9 @@ class DonorCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Column(
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             radius: 50,
-            backgroundImage: AssetImage(imageUrl),
+            backgroundImage: AssetImage('assets/Images/profilepic.png'),
           ),
           Text(
             'Name: $name',

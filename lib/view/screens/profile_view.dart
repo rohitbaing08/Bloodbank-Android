@@ -1,4 +1,3 @@
-import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/view_model/home_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,7 +33,7 @@ class _ProfileViewState extends State<ProfileView> {
                       });
                     },
                     icon: const Icon(
-                      Icons.logout_outlined,
+                      Icons.logout_sharp,
                       color: Colors.black,
                       size: 40,
                     )),
@@ -57,27 +56,8 @@ class _ProfileViewState extends State<ProfileView> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(150),
                         child: Image.asset(
-                          'assets/Images/profilepic.jpeg',
+                          'assets/Images/profilepic.png',
                           fit: BoxFit.fill,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: LightAppColors().seedColor,
-                          ),
-                          child: const Icon(
-                            Icons.edit,
-                            size: 18,
-                            color: Colors.black,
-                          ),
                         ),
                       ),
                     ),
