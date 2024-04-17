@@ -35,75 +35,108 @@ class _HomeViewState extends State<HomeView> {
                     child: Image.asset('assets/Images/appbar.png'),
                   ),
                 ),
-                Positioned(
-                  top: 40,
-                  left: 20,
-                  child: SizedBox(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${'Welcome ${value.currentUser.name}'} 👋',
-                          style: const TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 30),
+                        child: SizedBox(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '${'Welcome ${value.currentUser.name.split(' ')[0]}'} 👋',
+                                style: const TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Text(
+                                'Conquer the world by saving \nthe lives of other',
+                                softWrap: true,
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          'Conquer the world by saving \nthe lives of other',
-                          softWrap: true,
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 100),
-                        height: 400,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: Center(
+                          child: SizedBox(
+                            height: 400,
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Column(
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        router.push('/receivers-list');
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color:
-                                                    LightAppColors().seedColor),
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        height: 140,
-                                        width: 140,
-                                        child: Image.asset(
-                                            'assets/Images/Donate.png'),
-                                      ),
+                                    Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            router.push('/receivers-list');
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: LightAppColors()
+                                                        .seedColor),
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            height: 140,
+                                            width: 140,
+                                            child: Image.asset(
+                                                'assets/Images/Donate.png'),
+                                          ),
+                                        ),
+                                        const Text(
+                                          'Donate blood',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
                                     ),
-                                    const Text(
-                                      'Donate blood',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
+                                    Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            router.push('/donors-list');
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: LightAppColors()
+                                                        .seedColor),
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            height: 140,
+                                            width: 140,
+                                            child: Image.asset(
+                                                'assets/Images/Request.png'),
+                                          ),
+                                        ),
+                                        const Text(
+                                          'Receive blood',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
                                     )
                                   ],
                                 ),
@@ -111,7 +144,7 @@ class _HomeViewState extends State<HomeView> {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        router.push('/donors-list');
+                                        router.push('/bloodbanks-list');
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -123,11 +156,11 @@ class _HomeViewState extends State<HomeView> {
                                         height: 140,
                                         width: 140,
                                         child: Image.asset(
-                                            'assets/Images/Request.png'),
+                                            'assets/Images/Hospital.png'),
                                       ),
                                     ),
                                     const Text(
-                                      'Receive blood',
+                                      'Bloodbanks',
                                       style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
@@ -136,38 +169,12 @@ class _HomeViewState extends State<HomeView> {
                                 )
                               ],
                             ),
-                            Column(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    router.push('/bloodbanks-list');
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: LightAppColors().seedColor),
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    height: 140,
-                                    width: 140,
-                                    child: Image.asset(
-                                        'assets/Images/Hospital.png'),
-                                  ),
-                                ),
-                                const Text(
-                                  'Bloodbanks',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            )
-                          ],
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                  ],
+                )
               ],
             );
           }

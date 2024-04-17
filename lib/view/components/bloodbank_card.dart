@@ -40,7 +40,7 @@ class BloodbankCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: 180,
+                      width: 150,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

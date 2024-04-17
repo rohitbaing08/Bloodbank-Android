@@ -49,7 +49,6 @@ class BloodbankListView extends StatelessWidget {
                       if (!snapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
                       } else {
-                        print(snapshot.data[0].name);
                         var data = snapshot.data;
                         return SingleChildScrollView(
                           child: Column(
