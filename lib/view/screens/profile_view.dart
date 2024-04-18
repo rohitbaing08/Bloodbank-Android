@@ -1,6 +1,10 @@
+import 'package:bloodbank_management/models/user_model.dart';
+import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/view_model/home_view_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -209,6 +213,84 @@ class _ProfileViewState extends State<ProfileView> {
                                 ),
                               ),
                             ],
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors
+                                  .white, // Set the background color of the circular container to white
+                              border: Border.all(
+                                color: Colors.black.withOpacity(0.4),
+                                // Set the color of the border
+                                width: 2, // Set the width of the border
+                              ),
+                            ),
+                            child: const Icon(
+                              Icons.water_drop_outlined,
+                              size: 30,
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Can Donate blood?',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                StreamBuilder<QuerySnapshot>(
+                                    stream: FirebaseFirestore.instance
+                                        .collection('users')
+                                        .where('email',
+                                            isEqualTo: value.currentUser.email)
+                                        .snapshots(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.data != null) {
+                                        print(snapshot.data);
+                                        return CupertinoSwitch(
+                                            activeColor:
+                                                LightAppColors().seedColor,
+                                            value: value.currentUser.canDonate,
+                                            onChanged: (val) {
+                                              value.disableDonation(
+                                                  value.currentUser.id, val);
+                                              value.currentUser = UserModel(
+                                                  name: value.currentUser.name,
+                                                  address:
+                                                      value.currentUser.address,
+                                                  locality: value
+                                                      .currentUser.locality,
+                                                  age: value.currentUser.age,
+                                                  bloodgroup: value
+                                                      .currentUser.bloodgroup,
+                                                  adhaarNo: value
+                                                      .currentUser.adhaarNo,
+                                                  email:
+                                                      value.currentUser.email,
+                                                  username: value
+                                                      .currentUser.username,
+                                                  password: value
+                                                      .currentUser.password,
+                                                  id: value.currentUser.id,
+                                                  contact:
+                                                      value.currentUser.contact,
+                                                  canDonate: val);
+                                            });
+                                      } else {
+                                        return Container();
+                                      }
+                                    })
+                              ],
+                            ),
                           )
                         ],
                       ),

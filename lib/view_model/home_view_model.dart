@@ -15,7 +15,8 @@ class HomeViewModel extends ChangeNotifier {
       username: '',
       password: '',
       id: '',
-      contact: '');
+      contact: '',
+      canDonate: false);
 
   Future<dynamic> fetchUserDetails(String? email) async {
     final CollectionReference users =
@@ -26,6 +27,42 @@ class HomeViewModel extends ChangeNotifier {
       final userDoc = usersdocSnapshot.docs.first;
       userData = userDoc.data();
       currentUser = UserModel.fromJson(userData); // Contains user data
+    }
+  }
+
+  void enableDonation(String id) async {
+    try {
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('id', isEqualTo: id)
+          .get();
+      snapshot.docs.forEach((element) async {
+        DocumentReference docRef =
+            FirebaseFirestore.instance.collection('users').doc(element.id);
+        Map<String, dynamic> data = {'canDonate': true};
+        await docRef.update(data);
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void disableDonation(String id, bool value) async {
+    try {
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('id', isEqualTo: id)
+          .get();
+
+      snapshot.docs.forEach((element) async {
+        DocumentReference docRef =
+            FirebaseFirestore.instance.collection('users').doc(element.id);
+        Map<String, dynamic> data = {'canDonate': value};
+        await docRef.update(data);
+      });
+      notifyListeners();
+    } catch (e) {
+      print(e);
     }
   }
 }

@@ -1,7 +1,9 @@
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/view/components/receiver_card.dart';
+import 'package:bloodbank_management/view_model/users_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ReceiversListView extends StatelessWidget {
   const ReceiversListView({super.key});
@@ -17,89 +19,63 @@ class ReceiversListView extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            height: 50,
-            width: double.infinity,
-            color: LightAppColors().seedColor,
-            child: const Center(
-              child: Text(
-                'Donate Blood',
-                style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              ),
-            ),
-          ),
-          const Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ReceiverCard(
-                        name: 'Jay',
-                        age: '20',
-                        location: 'Bhiwandi',
-                        bloodgroup: 'A+'),
-                    Divider(
-                      height: 10,
-                      indent: 40,
-                      endIndent: 40,
-                    ),
-                    ReceiverCard(
-                        name: 'Mansi',
-                        age: '21',
-                        location: 'Kharghar',
-                        bloodgroup: 'B-'),
-                    Divider(
-                      height: 10,
-                      indent: 40,
-                      endIndent: 40,
-                    ),
-                    ReceiverCard(
-                        name: 'Sanjay',
-                        age: '35',
-                        location: 'Bhiwandi',
-                        bloodgroup: 'B+'),
-                    Divider(
-                      height: 10,
-                      indent: 40,
-                      endIndent: 40,
-                    ),
-                    ReceiverCard(
-                        name: 'Suman',
-                        age: '40',
-                        location: 'Govandi',
-                        bloodgroup: 'O+'),
-                    Divider(
-                      height: 10,
-                      indent: 40,
-                      endIndent: 40,
-                    ),
-                    ReceiverCard(
-                        name: 'Prasad',
-                        age: '29',
-                        location: 'Belapur',
-                        bloodgroup: 'AB+'),
-                    Divider(
-                      height: 10,
-                      indent: 40,
-                      endIndent: 40,
-                    ),
-                    ReceiverCard(
-                        name: 'Abhay',
-                        age: '23',
-                        location: 'Kurla',
-                        bloodgroup: 'A-'),
-                  ],
+      body: Consumer<UserViewModel>(
+        builder: (context, value, child) => Column(
+          children: [
+            Container(
+              height: 50,
+              width: double.infinity,
+              color: LightAppColors().seedColor,
+              child: const Center(
+                child: Text(
+                  'Donate Blood',
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
               ),
             ),
-          )
-        ],
+            Expanded(
+              child: FutureBuilder(
+                future: value.fetchReceivers(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: const CircularProgressIndicator());
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            ...List.generate(
+                                snapshot.data.length,
+                                (index) => Column(
+                                      children: [
+                                        ReceiverCard(
+                                            name: snapshot.data[index].name,
+                                            age: snapshot.data[index].age,
+                                            location:
+                                                snapshot.data[index].locality,
+                                            bloodgroup: snapshot
+                                                .data[index].bloodgroup),
+                                        const Divider(
+                                          height: 10,
+                                          indent: 40,
+                                          endIndent: 40,
+                                        )
+                                      ],
+                                    ))
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

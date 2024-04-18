@@ -38,7 +38,7 @@ class DonorCard extends StatelessWidget {
           ),
           Container(
             height: 50,
-            width: 100,
+            width: 80,
             decoration: BoxDecoration(
                 color: const Color.fromRGBO(217, 217, 217, 1),
                 border: Border.all(width: 1, color: LightAppColors().seedColor),
@@ -56,10 +56,9 @@ class DonorCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                height: 50,
-                width: 80,
+                height: 40,
+                width: 60,
                 decoration: BoxDecoration(
-                    color: const Color.fromRGBO(217, 217, 217, 1),
                     border:
                         Border.all(width: 1, color: LightAppColors().seedColor),
                     borderRadius: BorderRadius.circular(10)),
@@ -69,10 +68,9 @@ class DonorCard extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 50,
-                width: 80,
+                height: 40,
+                width: 60,
                 decoration: BoxDecoration(
-                    color: const Color.fromRGBO(217, 217, 217, 1),
                     border:
                         Border.all(width: 1, color: LightAppColors().seedColor),
                     borderRadius: BorderRadius.circular(10)),
@@ -82,10 +80,9 @@ class DonorCard extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 50,
-                width: 80,
+                height: 40,
+                width: 60,
                 decoration: BoxDecoration(
-                    color: const Color.fromRGBO(217, 217, 217, 1),
                     border:
                         Border.all(width: 1, color: LightAppColors().seedColor),
                     borderRadius: BorderRadius.circular(10)),

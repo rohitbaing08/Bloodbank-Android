@@ -198,7 +198,8 @@ class RegistrationForm extends StatelessWidget {
                             username: value.username,
                             password: value.password,
                             id: val.user!.uid,
-                            contact: contactController.text);
+                            contact: contactController.text,
+                            canDonate: false);
                         FirebaseFirestore.instance
                             .collection('/users')
                             .add(dataToSave.toJson());

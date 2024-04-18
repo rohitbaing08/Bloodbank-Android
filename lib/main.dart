@@ -4,6 +4,7 @@ import 'package:bloodbank_management/view_model/auth_view_model.dart';
 import 'package:bloodbank_management/view_model/bloodbank_view_model.dart';
 import 'package:bloodbank_management/view_model/camps_view_model.dart';
 import 'package:bloodbank_management/view_model/home_view_model.dart';
+import 'package:bloodbank_management/view_model/users_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +38,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => CampsViewModel(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => UserViewModel(),
+        )
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

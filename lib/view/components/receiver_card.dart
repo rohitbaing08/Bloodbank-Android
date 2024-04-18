@@ -51,7 +51,7 @@ class ReceiverCard extends StatelessWidget {
               ),
               Container(
                 height: 50,
-                width: 100,
+                width: 80,
                 decoration: BoxDecoration(
                     color: const Color.fromRGBO(217, 217, 217, 1),
                     border:
@@ -66,17 +66,16 @@ class ReceiverCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                height: 50,
-                width: 80,
+                height: 40,
+                width: 60,
                 decoration: BoxDecoration(
-                    color: const Color.fromRGBO(217, 217, 217, 1),
                     border:
                         Border.all(width: 1, color: LightAppColors().seedColor),
                     borderRadius: BorderRadius.circular(10)),
@@ -86,10 +85,9 @@ class ReceiverCard extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 50,
-                width: 80,
+                height: 40,
+                width: 60,
                 decoration: BoxDecoration(
-                    color: const Color.fromRGBO(217, 217, 217, 1),
                     border:
                         Border.all(width: 1, color: LightAppColors().seedColor),
                     borderRadius: BorderRadius.circular(10)),
@@ -99,10 +97,9 @@ class ReceiverCard extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 50,
-                width: 80,
+                height: 40,
+                width: 60,
                 decoration: BoxDecoration(
-                    color: const Color.fromRGBO(217, 217, 217, 1),
                     border:
                         Border.all(width: 1, color: LightAppColors().seedColor),
                     borderRadius: BorderRadius.circular(10)),

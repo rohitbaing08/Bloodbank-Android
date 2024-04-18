@@ -10,6 +10,7 @@ class UserModel {
   final String email;
   final String username;
   final String password;
+  final bool canDonate;
 
   UserModel({
     required this.name,
@@ -23,22 +24,23 @@ class UserModel {
     required this.password,
     required this.id,
     required this.contact,
+    required this.canDonate,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: json['id'],
-      name: json['name'],
-      address: json['address'],
-      locality: json['locality'],
-      age: json['age'],
-      contact: json['contact'],
-      bloodgroup: json['bloodgroup'],
-      adhaarNo: json['adhaarNo'],
-      email: json['email'],
-      username: json['username'],
-      password: json['password'],
-    );
+        id: json['id'],
+        name: json['name'],
+        address: json['address'],
+        locality: json['locality'],
+        age: json['age'],
+        contact: json['contact'],
+        bloodgroup: json['bloodgroup'],
+        adhaarNo: json['adhaarNo'],
+        email: json['email'],
+        username: json['username'],
+        password: json['password'],
+        canDonate: json['canDonate']);
   }
 
   Map<String, dynamic> toJson() {
@@ -54,6 +56,7 @@ class UserModel {
       'email': email,
       'username': username,
       'password': password,
+      'canDonate': canDonate
     };
   }
 }
