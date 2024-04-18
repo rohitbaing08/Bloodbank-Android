@@ -6,6 +6,7 @@ import 'package:bloodbank_management/view/screens/donors_list_view.dart';
 import 'package:bloodbank_management/view/screens/helpline_view.dart';
 import 'package:bloodbank_management/view/screens/home_view.dart';
 import 'package:bloodbank_management/view/screens/login_view.dart';
+import 'package:bloodbank_management/view/screens/otp_verification.dart';
 import 'package:bloodbank_management/view/screens/receivers_list_view.dart';
 import 'package:bloodbank_management/view/screens/register_view.dart';
 import 'package:bloodbank_management/view/screens/registration_form_screen.dart';
@@ -42,6 +43,11 @@ GoRouter router = GoRouter(routes: [
     name: 'registration-form',
     path: '/registration-form',
     builder: (context, state) => const RegistrationForm(),
+  ),
+  GoRoute(
+    name: 'otp-verification',
+    path: '/otp-verification',
+    builder: (context, state) => const OTPVerificationView(),
   ),
   GoRoute(
     name: 'helpline',

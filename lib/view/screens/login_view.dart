@@ -122,49 +122,6 @@ class LoginView extends StatelessWidget {
                   ),
                 ),
               ),
-              const Text(
-                'Or continue with',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Color.fromRGBO(124, 124, 124, 1),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/Icons/Google.png'),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/Icons/Facebook.png'),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
               const SizedBox(
                 height: 10,
               ),

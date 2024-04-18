@@ -2,12 +2,8 @@ import 'package:bloodbank_management/models/user_model.dart';
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/view_model/auth_view_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistrationForm extends StatelessWidget {
   const RegistrationForm({super.key});
@@ -80,6 +76,7 @@ class RegistrationForm extends StatelessWidget {
               ),
               TextFormField(
                 controller: contactController,
+                keyboardType: TextInputType.phone,
                 decoration: const InputDecoration(
                   hintText: 'Enter mobile number',
                   label: Text(
@@ -98,6 +95,7 @@ class RegistrationForm extends StatelessWidget {
               ),
               TextFormField(
                 controller: adhaarController,
+                keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                   hintText: 'Enter Adhaar number',
                   label: Text(
@@ -141,6 +139,7 @@ class RegistrationForm extends StatelessWidget {
                     width: 160,
                     child: TextFormField(
                       controller: ageController,
+                      keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         hintText: 'Enter age',
                         label: Text(
@@ -181,41 +180,21 @@ class RegistrationForm extends StatelessWidget {
               ),
               Consumer<AuthViewModel>(
                 builder: (context, value, child) => TextButton(
-                  onPressed: () async {
-                    try {
-                      await FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                              email: value.email, password: value.password)
-                          .then((val) {
-                        UserModel dataToSave = UserModel(
-                            name: nameController.text,
-                            address: addressController.text,
-                            locality: localityController.text,
-                            age: ageController.text.toString(),
-                            bloodgroup: bloodgroupController.text,
-                            adhaarNo: adhaarController.text,
-                            email: value.email.toString(),
-                            username: value.username,
-                            password: value.password,
-                            id: val.user!.uid,
-                            contact: contactController.text,
-                            canDonate: false);
-                        FirebaseFirestore.instance
-                            .collection('/users')
-                            .add(dataToSave.toJson());
-                      }).then((value) async {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.setBool('isLoggedIn', true);
-                        Fluttertoast.showToast(
-                            msg: 'User registered successfully!!');
-                        router.go('/bottom-nav');
-                      });
-                    } catch (e) {
-                      print(e);
-                      Fluttertoast.showToast(
-                          msg: 'Registration unsuccessful!!\nTry again.');
-                    }
+                  onPressed: () {
+                    value.user = UserModel(
+                        name: nameController.text,
+                        address: addressController.text,
+                        locality: localityController.text,
+                        age: ageController.text.toString(),
+                        bloodgroup: bloodgroupController.text,
+                        adhaarNo: adhaarController.text,
+                        email: value.user.email.toString(),
+                        username: value.user.username,
+                        password: value.user.password,
+                        id: '',
+                        contact: contactController.text,
+                        canDonate: false);
+                    router.push('/otp-verification');
                   },
                   style: ButtonStyle(
                     overlayColor: MaterialStateProperty.all(Colors.transparent),

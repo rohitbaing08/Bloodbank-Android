@@ -1,3 +1,4 @@
+import 'package:bloodbank_management/models/user_model.dart';
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/view_model/auth_view_model.dart';
@@ -36,6 +37,7 @@ class RegisterView extends StatelessWidget {
               ),
               TextFormField(
                 controller: emailController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   hintText: 'Enter email',
                   label: Text(
@@ -72,6 +74,7 @@ class RegisterView extends StatelessWidget {
               ),
               TextFormField(
                 controller: passwordController,
+                obscureText: true,
                 decoration: const InputDecoration(
                   hintText: 'Enter password',
                   label: Text(
@@ -90,10 +93,20 @@ class RegisterView extends StatelessWidget {
               ),
               Consumer<AuthViewModel>(
                 builder: (context, value, child) => TextButton(
-                  onPressed: () async {
-                    value.email = emailController.text;
-                    value.password = passwordController.text;
-                    value.username = usernameController.text;
+                  onPressed: () {
+                    value.user = UserModel(
+                        name: '',
+                        address: '',
+                        locality: '',
+                        age: '',
+                        bloodgroup: '',
+                        adhaarNo: '',
+                        email: emailController.text,
+                        username: usernameController.text,
+                        password: passwordController.text,
+                        id: '',
+                        contact: '',
+                        canDonate: false);
                     router.go('/registration-form');
                   },
                   style: ButtonStyle(
@@ -116,49 +129,6 @@ class RegisterView extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-              ),
-              const Text(
-                'Or continue with',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Color.fromRGBO(124, 124, 124, 1),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/Icons/Google.png'),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/Icons/Facebook.png'),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
                 ),
               ),
               const SizedBox(
