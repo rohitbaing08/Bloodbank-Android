@@ -28,7 +28,8 @@ class UserViewModel extends ChangeNotifier {
 
   Future<dynamic> fetchReceivers() async {
     try {
-      QuerySnapshot querySnapshot = await _firestore.collection('users').get();
+      QuerySnapshot querySnapshot =
+          await _firestore.collection('requests').get();
       List<UserModel> users = querySnapshot.docs.map((doc) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         return UserModel.fromJson(data);
@@ -37,6 +38,16 @@ class UserViewModel extends ChangeNotifier {
     } catch (e) {
       print('Error fetching users: $e');
       return []; // Return an empty list if there's an error
+    }
+  }
+
+  Future<dynamic> addReceiver(UserModel user) async {
+    try {
+      await _firestore.collection('/requests').add(user.toJson());
+      print('Request made successfully');
+    } catch (e) {
+      print('Error fetching users: $e');
+      // Return an empty list if there's an error
     }
   }
 }

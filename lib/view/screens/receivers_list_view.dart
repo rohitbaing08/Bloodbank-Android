@@ -103,9 +103,6 @@ class ReceiversListView extends StatelessWidget {
                       return const Center(child: CircularProgressIndicator());
                     } else {
                       var data = snapshot.data
-                          .where((user) => user.id != val.currentUser.id)
-                          .toList();
-                      data = data
                           .where((element) =>
                               element.bloodgroup
                                   .toString()

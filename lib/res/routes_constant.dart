@@ -72,5 +72,5 @@ GoRouter router = GoRouter(routes: [
     name: 'donors-list',
     path: '/donors-list',
     builder: (context, state) => const DonorsListView(),
-  )
+  ),
 ]);

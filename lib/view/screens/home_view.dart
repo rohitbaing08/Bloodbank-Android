@@ -1,5 +1,6 @@
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
+import 'package:bloodbank_management/view/screens/request_blood_view.dart';
 import 'package:bloodbank_management/view_model/home_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -127,7 +128,7 @@ class _HomeViewState extends State<HomeView> {
                                             height: 140,
                                             width: 140,
                                             child: Image.asset(
-                                                'assets/Images/Request.png'),
+                                                'assets/Images/Receive.png'),
                                           ),
                                         ),
                                         const Text(
@@ -140,31 +141,71 @@ class _HomeViewState extends State<HomeView> {
                                     )
                                   ],
                                 ),
-                                Column(
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        router.push('/bloodbanks-list');
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color:
-                                                    LightAppColors().seedColor),
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        height: 140,
-                                        width: 140,
-                                        child: Image.asset(
-                                            'assets/Images/Hospital.png'),
-                                      ),
+                                    Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      RequestForm(
+                                                    user: value.currentUser,
+                                                  ),
+                                                ));
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: LightAppColors()
+                                                        .seedColor),
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            height: 140,
+                                            width: 140,
+                                            child: Image.asset(
+                                                'assets/Images/Request.jpg'),
+                                          ),
+                                        ),
+                                        const Text(
+                                          'Request blood',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
                                     ),
-                                    const Text(
-                                      'Bloodbanks',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    )
+                                    Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            router.push('/bloodbanks-list');
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: LightAppColors()
+                                                        .seedColor),
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            height: 140,
+                                            width: 140,
+                                            child: Image.asset(
+                                                'assets/Images/Hospital.png'),
+                                          ),
+                                        ),
+                                        const Text(
+                                          'Bloodbanks',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
+                                    ),
                                   ],
                                 )
                               ],
