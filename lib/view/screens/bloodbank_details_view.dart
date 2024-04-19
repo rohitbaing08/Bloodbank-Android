@@ -2,6 +2,7 @@ import 'package:bloodbank_management/models/bloodbank_model.dart';
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 
 class BloodbankDetailsView extends StatelessWidget {
   final BloodbankModel bloodbank;
@@ -57,7 +58,7 @@ class BloodbankDetailsView extends StatelessWidget {
               style: const TextStyle(fontSize: 16),
             ),
             Text(
-              'Tel: ${bloodbank.contact}',
+              'Contact: ${bloodbank.contact}',
               style: const TextStyle(fontSize: 16),
             ),
             Text(
@@ -71,7 +72,9 @@ class BloodbankDetailsView extends StatelessWidget {
               height: 10,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () async {
+                await MapsLauncher.launchQuery(bloodbank.address);
+              },
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
               ),

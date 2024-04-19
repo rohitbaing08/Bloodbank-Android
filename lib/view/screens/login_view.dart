@@ -35,6 +35,7 @@ class LoginView extends StatelessWidget {
               ),
               TextFormField(
                 controller: emailController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   hintText: 'Enter email',
                   label: Text(
@@ -53,6 +54,7 @@ class LoginView extends StatelessWidget {
               ),
               TextFormField(
                 controller: passwordController,
+                obscureText: true,
                 decoration: const InputDecoration(
                   hintText: 'Enter password',
                   label: Text(

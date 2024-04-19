@@ -33,7 +33,7 @@ class _ProfileViewState extends State<ProfileView> {
                             await SharedPreferences.getInstance();
                         prefs.setBool('isLoggedIn', false);
                         Fluttertoast.showToast(msg: 'Logout successfully!!');
-                        router.go('/register');
+                        router.go('/login');
                       });
                     },
                     icon: const Icon(
