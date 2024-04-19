@@ -4,6 +4,7 @@ import 'package:bloodbank_management/view/screens/request_blood_view.dart';
 import 'package:bloodbank_management/view_model/home_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
@@ -23,8 +24,8 @@ class _HomeViewState extends State<HomeView> {
             value.fetchUserDetails(FirebaseAuth.instance.currentUser!.email),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: SpinKitSpinningLines(color: LightAppColors().seedColor),
             );
           } else {
             return Stack(

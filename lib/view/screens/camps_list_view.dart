@@ -2,6 +2,7 @@ import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/view/components/camp_card.dart';
 import 'package:bloodbank_management/view_model/camps_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 class CampsListView extends StatelessWidget {
@@ -35,7 +36,10 @@ class CampsListView extends StatelessWidget {
                   future: value.fetchCamps(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
+                      return Center(
+                        child: SpinKitSpinningLines(
+                            color: LightAppColors().seedColor),
+                      );
                     } else {
                       var data = snapshot.data;
                       return SingleChildScrollView(

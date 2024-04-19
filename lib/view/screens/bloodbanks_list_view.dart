@@ -3,6 +3,7 @@ import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/view/components/bloodbank_card.dart';
 import 'package:bloodbank_management/view_model/bloodbank_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 class BloodbankListView extends StatelessWidget {
@@ -49,7 +50,10 @@ class BloodbankListView extends StatelessWidget {
                     future: value.fetchBloodbanks(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
+                        return Center(
+                          child: SpinKitSpinningLines(
+                              color: LightAppColors().seedColor),
+                        );
                       } else {
                         value.data = snapshot.data
                             .where((ele) => ele.name

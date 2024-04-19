@@ -1,14 +1,8 @@
-import 'package:bloodbank_management/models/user_model.dart';
 import 'package:bloodbank_management/res/colors.dart';
-import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/view_model/auth_view_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class OTPVerificationView extends StatelessWidget {
   const OTPVerificationView({super.key});
@@ -249,59 +243,12 @@ class OTPVerificationView extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () async {
-                        print(pin1.text +
-                            pin2.text +
-                            pin3.text +
-                            pin4.text +
-                            pin5.text +
-                            pin6.text);
                         String pin = pin1.text +
                             pin2.text +
                             pin3.text +
                             pin4.text +
                             pin5.text +
                             pin6.text;
-                        try {
-                          // PhoneAuthCredential credetials =
-                          //     PhoneAuthProvider.credential(
-                          //         verificationId: value.verificationId,
-                          //         smsCode: pin);
-                          // await FirebaseAuth.instance
-                          //     .signInWithCredential(credetials);
-                          await FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
-                                  email: value.user.email,
-                                  password: value.user.password)
-                              .then((val) {
-                            UserModel dataToSave = UserModel(
-                                name: value.user.name,
-                                address: value.user.address,
-                                locality: value.user.locality,
-                                age: value.user.age,
-                                bloodgroup: value.user.bloodgroup,
-                                adhaarNo: value.user.adhaarNo,
-                                email: value.user.email,
-                                username: value.user.username,
-                                password: value.user.password,
-                                id: val.user!.uid,
-                                contact: value.user.contact,
-                                canDonate: false);
-                            FirebaseFirestore.instance
-                                .collection('/users')
-                                .add(dataToSave.toJson());
-                          }).then((value) async {
-                            SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            prefs.setBool('isLoggedIn', true);
-                            Fluttertoast.showToast(
-                                msg: 'User registered successfully!!');
-                            router.go('/bottom-nav');
-                          });
-                        } catch (e) {
-                          print(e);
-                          Fluttertoast.showToast(
-                              msg: 'Registration unsuccessful!!\nTry again.');
-                        }
                       },
                       style: ButtonStyle(
                         overlayColor:

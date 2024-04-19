@@ -105,7 +105,6 @@ class _RequestFormState extends State<RequestForm> {
                 ),
                 TextFormField(
                   controller: contactController,
-                  readOnly: true,
                   keyboardType: TextInputType.phone,
                   decoration: const InputDecoration(
                     hintText: 'Enter mobile number',
@@ -125,7 +124,6 @@ class _RequestFormState extends State<RequestForm> {
                 ),
                 TextFormField(
                   controller: adhaarController,
-                  readOnly: true,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     hintText: 'Enter Adhaar number',

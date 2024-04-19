@@ -6,6 +6,7 @@ import 'package:bloodbank_management/view_model/home_view_model.dart';
 import 'package:bloodbank_management/view_model/users_view_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 class DonorsListView extends StatelessWidget {
@@ -100,7 +101,10 @@ class DonorsListView extends StatelessWidget {
                   future: value.fetchDonors(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
+                      return Center(
+                        child: SpinKitSpinningLines(
+                            color: LightAppColors().seedColor),
+                      );
                     } else {
                       var data = snapshot.data
                           .where((user) => user.id != val.currentUser.id)

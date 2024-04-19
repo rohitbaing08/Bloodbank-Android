@@ -1,6 +1,7 @@
 import 'package:bloodbank_management/models/bloodbank_model.dart';
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
 class BloodbankDetailsView extends StatelessWidget {
@@ -33,8 +34,9 @@ class BloodbankDetailsView extends StatelessWidget {
                   loadingBuilder: (BuildContext context, Widget child,
                       ImageChunkEvent? loadingProgress) {
                     if (loadingProgress == null) return child;
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                    return Center(
+                      child: SpinKitSpinningLines(
+                          color: LightAppColors().seedColor),
                     );
                   },
                   errorBuilder: (BuildContext context, Object exception,
