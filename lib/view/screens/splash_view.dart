@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashView extends StatefulWidget {
@@ -12,7 +13,10 @@ class SplashView extends StatefulWidget {
   State<SplashView> createState() => _SplashViewState();
 }
 
-class _SplashViewState extends State<SplashView> {
+class _SplashViewState extends State<SplashView>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+
   Future<bool> isLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool('isLoggedIn') ?? false;
@@ -20,9 +24,12 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   void initState() {
+    controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 4));
+
     isLoggedIn().then(
       (value) {
-        Timer(const Duration(seconds: 2), () {
+        Timer(const Duration(seconds: 5), () {
           value ? router.go('/bottom-nav') : router.go('/login');
         });
       },
@@ -41,10 +48,13 @@ class _SplashViewState extends State<SplashView> {
             Container(
               height: 300,
               width: 300,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/Images/Logo.png'),
-                ),
+              child: Lottie.asset(
+                'assets/Icons/lottie.json',
+                repeat: false,
+                controller: controller,
+                onLoaded: (p0) {
+                  controller.forward();
+                },
               ),
             ),
             Text(
