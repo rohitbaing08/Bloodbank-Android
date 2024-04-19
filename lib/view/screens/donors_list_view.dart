@@ -2,6 +2,7 @@ import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/view/components/donor_card.dart';
 import 'package:bloodbank_management/view/components/search_filters.dart';
+import 'package:bloodbank_management/view_model/home_view_model.dart';
 import 'package:bloodbank_management/view_model/users_view_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -94,49 +95,54 @@ class DonorsListView extends StatelessWidget {
                   }
                 }),
             Expanded(
-              child: FutureBuilder(
-                future: value.fetchDonors(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    var data = snapshot.data
-                        .where((element) =>
-                            element.bloodgroup
-                                .toString()
-                                .toLowerCase()
-                                .contains(selectedBloodgroup.toLowerCase()) &&
-                            element.locality
-                                .toString()
-                                .toLowerCase()
-                                .contains(selectedLocation.toLowerCase()))
-                        .toList();
-                    print(data);
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            ...List.generate(
-                                data.length,
-                                (index) => Column(
-                                      children: [
-                                        DonorCard(
-                                          donor: data[index],
-                                        ),
-                                        const Divider(
-                                          height: 10,
-                                          indent: 40,
-                                          endIndent: 40,
-                                        )
-                                      ],
-                                    ))
-                          ],
+              child: Consumer<HomeViewModel>(
+                builder: (context, val, child) => FutureBuilder(
+                  future: value.fetchDonors(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      var data = snapshot.data
+                          .where((user) => user.id != val.currentUser.id)
+                          .toList();
+                      data = data
+                          .where((element) =>
+                              element.bloodgroup
+                                  .toString()
+                                  .toLowerCase()
+                                  .contains(selectedBloodgroup.toLowerCase()) &&
+                              element.locality
+                                  .toString()
+                                  .toLowerCase()
+                                  .contains(selectedLocation.toLowerCase()))
+                          .toList();
+                      print(data);
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              ...List.generate(
+                                  data.length,
+                                  (index) => Column(
+                                        children: [
+                                          DonorCard(
+                                            donor: data[index],
+                                          ),
+                                          const Divider(
+                                            height: 10,
+                                            indent: 40,
+                                            endIndent: 40,
+                                          )
+                                        ],
+                                      ))
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                },
+                      );
+                    }
+                  },
+                ),
               ),
             )
           ],
