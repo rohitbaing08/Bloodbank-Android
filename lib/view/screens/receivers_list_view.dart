@@ -70,7 +70,7 @@ class ReceiversListView extends StatelessWidget {
                       children: [
                         SearchFilter(
                           title: selectedLocation == ''
-                              ? 'Blood group'
+                              ? 'Location'
                               : selectedLocation,
                           selected: location,
                           ontap: (val) {
