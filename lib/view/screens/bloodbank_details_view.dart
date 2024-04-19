@@ -1,6 +1,5 @@
 import 'package:bloodbank_management/models/bloodbank_model.dart';
 import 'package:bloodbank_management/res/colors.dart';
-import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
@@ -14,7 +13,7 @@ class BloodbankDetailsView extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            router.pop();
+            Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),

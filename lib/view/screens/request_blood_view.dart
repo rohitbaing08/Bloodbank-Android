@@ -38,26 +38,34 @@ class _RequestFormState extends State<RequestForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
       body: Consumer<HomeViewModel>(
         builder: (context, val, child) => SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Enter the Required Details',
+                  'Request Blood',
                   textAlign: TextAlign.center,
                   softWrap: true,
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 30,
                     color: LightAppColors().seedColor,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 TextFormField(
                   controller: nameController,
@@ -201,7 +209,7 @@ class _RequestFormState extends State<RequestForm> {
                   ),
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 Consumer<UserViewModel>(
                   builder: (context, value, child) => TextButton(
