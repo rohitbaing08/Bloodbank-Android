@@ -1,9 +1,11 @@
+import 'package:bloodbank_management/models/bloodbank_model.dart';
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:flutter/material.dart';
 
 class BloodbankDetailsView extends StatelessWidget {
-  const BloodbankDetailsView({super.key});
+  final BloodbankModel bloodbank;
+  BloodbankDetailsView({super.key, required this.bloodbank});
 
   @override
   Widget build(BuildContext context) {
@@ -23,33 +25,47 @@ class BloodbankDetailsView extends StatelessWidget {
           children: [
             SizedBox(
               width: double.infinity,
-              child: Image.asset('assets/Images/details.png'),
+              height: 250,
+              child: Center(
+                child: Image.network(
+                  bloodbank.image,
+                  fit: BoxFit.contain,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                  errorBuilder: (BuildContext context, Object exception,
+                      StackTrace? stackTrace) {
+                    return const Text('Image load failed');
+                  },
+                ),
+              ),
             ),
-            const Text(
-              'Blood Bank Name',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+            Text(
+              bloodbank.name,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 20,
             ),
-            const Text(
-              'Location: Ramavarmupuram, Thrissur',
-              style: TextStyle(fontSize: 16),
+            Text(
+              'Location: ${bloodbank.location}',
+              style: const TextStyle(fontSize: 16),
             ),
-            const Text(
-              'Tel: +91 487 2323964, 2320999',
-              style: TextStyle(fontSize: 16),
+            Text(
+              'Tel: ${bloodbank.contact}',
+              style: const TextStyle(fontSize: 16),
             ),
-            const Text(
-              'Email: admin@bloodbank.com',
-              style: TextStyle(fontSize: 16),
+            Text(
+              'Email: ${bloodbank.email}',
+              style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(
               height: 20,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Image.asset('assets/Images/location.png'),
             ),
             const SizedBox(
               height: 10,

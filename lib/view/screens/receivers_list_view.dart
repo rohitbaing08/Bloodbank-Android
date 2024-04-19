@@ -99,10 +99,8 @@ class ReceiversListView extends StatelessWidget {
                                 (index) => Column(
                                       children: [
                                         ReceiverCard(
-                                            name: data[index].name,
-                                            age: data[index].age,
-                                            location: data[index].locality,
-                                            bloodgroup: data[index].bloodgroup),
+                                          receiver: data[index],
+                                        ),
                                         const Divider(
                                           height: 10,
                                           indent: 40,

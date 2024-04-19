@@ -1,4 +1,3 @@
-import 'package:bloodbank_management/view/screens/bloodbank_details_view.dart';
 import 'package:bloodbank_management/view/screens/bloodbanks_list_view.dart';
 import 'package:bloodbank_management/view/screens/bottom_navbar.dart';
 import 'package:bloodbank_management/view/screens/camps_list_view.dart';
@@ -63,11 +62,6 @@ GoRouter router = GoRouter(routes: [
     name: 'bloodbanks-list',
     path: '/bloodbanks-list',
     builder: (context, state) => const BloodbankListView(),
-  ),
-  GoRoute(
-    name: 'bloodbanks-details',
-    path: '/bloodbanks-details',
-    builder: (context, state) => const BloodbankDetailsView(),
   ),
   GoRoute(
     name: 'receivers-list',

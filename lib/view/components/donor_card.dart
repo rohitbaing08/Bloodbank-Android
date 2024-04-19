@@ -1,18 +1,16 @@
+import 'package:bloodbank_management/models/user_model.dart';
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DonorCard extends StatelessWidget {
-  final String name;
-  final String age;
-  final String location;
+  final UserModel donor;
 
-  final String bloodgroup;
-  const DonorCard(
-      {super.key,
-      required this.name,
-      required this.age,
-      required this.location,
-      required this.bloodgroup});
+  const DonorCard({
+    super.key,
+    required this.donor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +23,15 @@ class DonorCard extends StatelessWidget {
             backgroundImage: AssetImage('assets/Images/profilepic.png'),
           ),
           Text(
-            'Name: $name',
+            'Name:${donor.name}',
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
           ),
           Text(
-            'Age: $age',
+            'Age:${donor.age}',
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
           ),
           Text(
-            'Location: $location',
+            'Location:${donor.locality}',
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
           ),
           Container(
@@ -45,7 +43,7 @@ class DonorCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10)),
             child: Center(
                 child: Text(
-              bloodgroup,
+              donor.bloodgroup,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             )),
           ),
@@ -62,9 +60,15 @@ class DonorCard extends StatelessWidget {
                     border:
                         Border.all(width: 1, color: LightAppColors().seedColor),
                     borderRadius: BorderRadius.circular(10)),
-                child: Icon(
-                  Icons.phone,
-                  color: LightAppColors().seedColor,
+                child: IconButton(
+                  onPressed: () async {
+                    final Uri url = Uri(scheme: 'tel', path: donor.contact);
+                    await launchUrl(url);
+                  },
+                  icon: Icon(
+                    Icons.phone,
+                    color: LightAppColors().seedColor,
+                  ),
                 ),
               ),
               Container(
@@ -74,9 +78,15 @@ class DonorCard extends StatelessWidget {
                     border:
                         Border.all(width: 1, color: LightAppColors().seedColor),
                     borderRadius: BorderRadius.circular(10)),
-                child: Icon(
-                  Icons.message,
-                  color: LightAppColors().seedColor,
+                child: IconButton(
+                  onPressed: () async {
+                    final Uri url = Uri(scheme: 'sms', path: donor.contact);
+                    await launchUrl(url);
+                  },
+                  icon: Icon(
+                    Icons.message,
+                    color: LightAppColors().seedColor,
+                  ),
                 ),
               ),
               Container(
@@ -86,9 +96,26 @@ class DonorCard extends StatelessWidget {
                     border:
                         Border.all(width: 1, color: LightAppColors().seedColor),
                     borderRadius: BorderRadius.circular(10)),
-                child: Icon(
-                  Icons.share,
-                  color: LightAppColors().seedColor,
+                child: IconButton(
+                  onPressed: () async {
+                    String message =
+                        '''🩸📲 *Hey there! Check out this amazing profile from Hopefully, your go-to blood bank app! 🩸*
+
+👤 *Name:* ${donor.name}
+🏠 *Address:* ${donor.address}
+🅱️ *Blood Group:* ${donor.bloodgroup}
+🎂 *Age:* ${donor.age}
+📞 *Contact:* ${donor.contact}
+📧 *Email:* ${donor.email}
+
+💉 *Be a lifesaver, join Hopefully today!* 💉
+Let's spread the word and make a difference together! 🌟 #DonateBlood #SaveLives 🌟''';
+                    await Share.share(message);
+                  },
+                  icon: Icon(
+                    Icons.share,
+                    color: LightAppColors().seedColor,
+                  ),
                 ),
               )
             ],

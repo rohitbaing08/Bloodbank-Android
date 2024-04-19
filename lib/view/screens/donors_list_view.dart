@@ -99,10 +99,8 @@ class DonorsListView extends StatelessWidget {
                                 (index) => Column(
                                       children: [
                                         DonorCard(
-                                            name: data[index].name,
-                                            age: data[index].age,
-                                            location: data[index].locality,
-                                            bloodgroup: data[index].bloodgroup),
+                                          donor: data[index],
+                                        ),
                                         const Divider(
                                           height: 10,
                                           indent: 40,

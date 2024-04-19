@@ -180,7 +180,7 @@ class RegistrationForm extends StatelessWidget {
               ),
               Consumer<AuthViewModel>(
                 builder: (context, value, child) => TextButton(
-                  onPressed: () {
+                  onPressed: () async {
                     value.user = UserModel(
                         name: nameController.text,
                         address: addressController.text,
@@ -194,6 +194,23 @@ class RegistrationForm extends StatelessWidget {
                         id: '',
                         contact: contactController.text,
                         canDonate: false);
+                    // try {
+                    //   await FirebaseAuth.instance.verifyPhoneNumber(
+                    //       phoneNumber: '+91 ${contactController.text}',
+                    //       verificationCompleted:
+                    //           (PhoneAuthCredential credentials) {},
+                    //       verificationFailed: (FirebaseAuthException e) {
+                    //         print('Error is ' + e.toString());
+                    //       },
+                    //       codeSent: (String verificationId, int? token) {
+                    //         print(verificationId);
+                    //         // value.verificationId = verificationId;
+                    //         // router.push('/otp-verification');
+                    //       },
+                    //       codeAutoRetrievalTimeout: (String verificationId) {});
+                    // } catch (e) {
+                    //   print(e);
+                    // }
                     router.push('/otp-verification');
                   },
                   style: ButtonStyle(

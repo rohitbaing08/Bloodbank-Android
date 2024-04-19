@@ -1,18 +1,15 @@
+import 'package:bloodbank_management/models/user_model.dart';
 import 'package:bloodbank_management/res/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReceiverCard extends StatelessWidget {
-  final String name;
-  final String age;
-  final String location;
-  final String bloodgroup;
+  final UserModel receiver;
 
   const ReceiverCard({
     super.key,
-    required this.name,
-    required this.age,
-    required this.location,
-    required this.bloodgroup,
+    required this.receiver,
   });
 
   @override
@@ -33,17 +30,17 @@ class ReceiverCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Name: $name',
+                    'Name:${receiver.name}',
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.w400),
                   ),
                   Text(
-                    'Age: $age',
+                    'Age:${receiver.age}',
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.w400),
                   ),
                   Text(
-                    'Location: $location',
+                    'Location:${receiver.locality}',
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.w400),
                   ),
@@ -59,7 +56,7 @@ class ReceiverCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
                 child: Center(
                     child: Text(
-                  bloodgroup,
+                  receiver.bloodgroup,
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
                 )),
@@ -79,9 +76,15 @@ class ReceiverCard extends StatelessWidget {
                     border:
                         Border.all(width: 1, color: LightAppColors().seedColor),
                     borderRadius: BorderRadius.circular(10)),
-                child: Icon(
-                  Icons.phone,
-                  color: LightAppColors().seedColor,
+                child: IconButton(
+                  onPressed: () async {
+                    final Uri url = Uri(scheme: 'tel', path: receiver.contact);
+                    await launchUrl(url);
+                  },
+                  icon: Icon(
+                    Icons.phone,
+                    color: LightAppColors().seedColor,
+                  ),
                 ),
               ),
               Container(
@@ -91,9 +94,15 @@ class ReceiverCard extends StatelessWidget {
                     border:
                         Border.all(width: 1, color: LightAppColors().seedColor),
                     borderRadius: BorderRadius.circular(10)),
-                child: Icon(
-                  Icons.message,
-                  color: LightAppColors().seedColor,
+                child: IconButton(
+                  onPressed: () async {
+                    final Uri url = Uri(scheme: 'sms', path: receiver.contact);
+                    await launchUrl(url);
+                  },
+                  icon: Icon(
+                    Icons.message,
+                    color: LightAppColors().seedColor,
+                  ),
                 ),
               ),
               Container(
@@ -103,13 +112,30 @@ class ReceiverCard extends StatelessWidget {
                     border:
                         Border.all(width: 1, color: LightAppColors().seedColor),
                     borderRadius: BorderRadius.circular(10)),
-                child: Icon(
-                  Icons.share,
-                  color: LightAppColors().seedColor,
+                child: IconButton(
+                  onPressed: () async {
+                    String message =
+                        '''🩸📲 *Hey there! Check out this amazing profile from Hopefully, your go-to blood bank app! 🩸*
+
+👤 *Name:* ${receiver.name}
+🏠 *Address:* ${receiver.address}
+🅱️ *Blood Group:* ${receiver.bloodgroup}
+🎂 *Age:* ${receiver.age}
+📞 *Contact:* ${receiver.contact}
+📧 *Email:* ${receiver.email}
+
+💉 *Be a lifesaver, join Hopefully today!* 💉
+Let's spread the word and make a difference together! 🌟 #DonateBlood #SaveLives 🌟''';
+                    await Share.share(message);
+                  },
+                  icon: Icon(
+                    Icons.share,
+                    color: LightAppColors().seedColor,
+                  ),
                 ),
               )
             ],
-          ),
+          )
         ],
       ),
     );

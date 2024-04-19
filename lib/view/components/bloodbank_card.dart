@@ -1,6 +1,6 @@
 import 'package:bloodbank_management/models/bloodbank_model.dart';
 import 'package:bloodbank_management/res/colors.dart';
-import 'package:bloodbank_management/res/routes_constant.dart';
+import 'package:bloodbank_management/view/screens/bloodbank_details_view.dart';
 import 'package:flutter/material.dart';
 
 class BloodbankCard extends StatelessWidget {
@@ -63,7 +63,12 @@ class BloodbankCard extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        router.push('/bloodbanks-details');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  BloodbankDetailsView(bloodbank: bloodbank),
+                            ));
                       },
                       style: ButtonStyle(
                         overlayColor:
