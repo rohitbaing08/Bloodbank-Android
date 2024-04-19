@@ -255,7 +255,6 @@ class _ProfileViewState extends State<ProfileView> {
                                         .snapshots(),
                                     builder: (context, snapshot) {
                                       if (snapshot.data != null) {
-                                        print(snapshot.data);
                                         return CupertinoSwitch(
                                             activeColor:
                                                 LightAppColors().seedColor,

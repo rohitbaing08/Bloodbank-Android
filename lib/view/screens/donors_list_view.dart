@@ -3,6 +3,7 @@ import 'package:bloodbank_management/res/routes_constant.dart';
 import 'package:bloodbank_management/view/components/donor_card.dart';
 import 'package:bloodbank_management/view/components/search_filters.dart';
 import 'package:bloodbank_management/view_model/users_view_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -45,31 +46,53 @@ class DonorsListView extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SearchFilter(
-                  title: 'Location',
-                  selected: location,
-                  ontap: (val) {
-                    print(val);
-                    selectedLocation = val;
-                    value.updateList();
-                  },
-                  items: value.locationList1,
-                ),
-                SearchFilter(
-                  title: 'Type',
-                  selected: bloodgroup,
-                  ontap: (val) {
-                    print(val);
-                    selectedBloodgroup = val;
-                    value.updateList();
-                  },
-                  items: value.bloodgroupsList1,
-                ),
-              ],
-            ),
+            StreamBuilder<QuerySnapshot>(
+                stream:
+                    FirebaseFirestore.instance.collection('users').snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Container();
+                  } else {
+                    var data = snapshot.data!.docs;
+                    List<String> locationList = [];
+                    List<String> bloodgroupsList = [];
+                    data.forEach((element) {
+                      locationList.add(element['locality']);
+                      bloodgroupsList.add(element['bloodgroup']);
+                      // To delete double values
+                      locationList = locationList.toSet().toList();
+                      bloodgroupsList = bloodgroupsList.toSet().toList();
+                      print(locationList + bloodgroupsList);
+                    });
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SearchFilter(
+                          title: selectedLocation == ''
+                              ? 'Location'
+                              : selectedLocation,
+                          selected: location,
+                          ontap: (val) {
+                            selectedLocation = val;
+                            value.updateList();
+                          },
+                          items: locationList,
+                        ),
+                        SearchFilter(
+                          title: selectedBloodgroup == ''
+                              ? 'Blood group'
+                              : selectedBloodgroup,
+                          selected: bloodgroup,
+                          ontap: (val) {
+                            selectedBloodgroup = val;
+                            value.updateList();
+                          },
+                          items: bloodgroupsList,
+                        ),
+                      ],
+                    );
+                  }
+                }),
             Expanded(
               child: FutureBuilder(
                 future: value.fetchDonors(),
